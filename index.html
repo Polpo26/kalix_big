@@ -123,9 +123,6 @@ var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest
 // Sidebar
 var sidebar = L.control.sidebar('sidebar').addTo(map);   
 // JSON layer
-var kalixGeoJSON = L.geoJSON(kalix);
-map.fitBounds(kalixGeoJSON.getBounds());
-// hover
 var kalixGeoJSON = L.geoJSON(kalix, {
     opacity: 0.5,    
     color: 'black',
@@ -134,12 +131,13 @@ var kalixGeoJSON = L.geoJSON(kalix, {
     weight: 1,
     onEachFeature: function(feature, layer) {
         layer.on({
-            mouseover: highlightFeatureOnMouseOver,
+            mouseover: highlightFeatureOnMouseOver,// hover
             mouseout: resetFeatureStyle
         });
     }
 });
 kalixGeoJSON.addTo(map);
+map.fitBounds(kalixGeoJSON.getBounds());
 function highlightFeatureOnMouseOver(e) {
     e.target.setStyle({
         opacity: 1,      
